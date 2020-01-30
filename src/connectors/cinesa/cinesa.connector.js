@@ -1,17 +1,17 @@
 'use strict';
 
 // config and services
-const axiosService = require('./../../services/axios.service');
-const cheerioService = require('./../../services/cheerio.service');
+const axiosService = require('../../services/axios.service');
+const cheerioService = require('../../services/cheerio.service');
 const cinesaDAO = require('./cinesa.DAO');
-const config = require('./../../config');
-const discordService = require('./../../services/discord.service');
-const logger = require('./../../services/logging.service');
+const config = require('../../config');
+const discordService = require('../../services/discord.service');
+const logger = require('../../services/logging.service');
 
-async function startScraper(channel) {
+async function startConnector(channel) {
 	try {
-		logger.info(__filename, 'startScraper', 'Initializing Cinesa scraper');
-		const cinesaWeb = await axiosService.get(config.scrapers.cinesa.url);
+		logger.info(__filename, 'startConnector', 'Initializing cinesa connector');
+		const cinesaWeb = await axiosService.get(config.connectors.cinesa.url);
 		const cheerioLoadedHtml = cheerioService.loadCheerio(cinesaWeb);
 		const cinesaItems = _getDOMItems(cheerioLoadedHtml);
 		const filteredItems = await _getNotPublishedItems(cinesaItems);
@@ -19,7 +19,7 @@ async function startScraper(channel) {
 			channel.send(_enrichMessage(movieItem));
 		});
 	} catch (e) {
-		logger.error(__filename, 'startScraper', e);
+		logger.error(__filename, 'startConnector', e);
 	}
 }
 
@@ -68,11 +68,11 @@ function _enrichMessage(movieItem) {
 	try {
 		logger.debug(__filename, '_enrichMessage', 'Enriching discord message');
 		return discordService.sendRichEmbed({
-			color: config.scrapers.cinesa.messageColor,
+			color: config.connectors.cinesa.messageColor,
 			desc: 'Estrenos de cartelera en CINESA',
 			thumbnail: movieItem.image,
 			title: movieItem.title,
-			URL: config.scrapers.cinesa.baseUrl + movieItem.urlMoviePath,
+			URL: config.connectors.cinesa.baseUrl + movieItem.urlMoviePath,
 		});
 	} catch (e) {
 		logger.error(__filename, '_enrichMessage', e);
@@ -80,5 +80,5 @@ function _enrichMessage(movieItem) {
 }
 
 module.exports = {
-	startScraper,
+	startConnector,
 };

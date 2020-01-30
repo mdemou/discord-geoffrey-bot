@@ -3,22 +3,22 @@
 // config and services
 const config = require('../../config');
 const chollometroDAO = require('./chollometro.DAO');
-const discordService = require('./../../services/discord.service');
-const logger = require('./../../services/logging.service');
-const rssService = require('./../../services/rss.parser.service');
+const discordService = require('../../services/discord.service');
+const logger = require('../../services/logging.service');
+const rssService = require('../../services/rss.parser.service');
 
-async function startScraper(channel) {
+async function startConnector(channel) {
 	try {
-		logger.info(__filename, 'startScraper', 'Initializing Chollometro scraper');
+		logger.info(__filename, 'startConnector', 'Initializing Chollometro connector');
 		const rssArray = await rssService.getRss(
-			config.scrapers.chollometro.url, _buildCustomRssFields(),
+			config.connectors.chollometro.url, _buildCustomRssFields(),
 		);
 		const filteredItems = await _getNotPublishedItems(rssArray.items);
 		filteredItems.forEach(cholloItem => {
 			channel.send(_enrichMessage(cholloItem));
 		});
 	} catch (e) {
-		logger.error(__filename, 'startScraper', e);
+		logger.error(__filename, 'startConnector', e);
 	}
 }
 
@@ -60,8 +60,8 @@ function _enrichMessage(rssItem) {
 		logger.debug(__filename, '_enrichMessage', 'Enriching discord message');
 		return discordService.sendRichEmbed({
 			author: rssItem.merchant[0]['$'].price ? `${rssItem.merchant[0]['$'].name} · ${rssItem.merchant[0]['$'].price}` : rssItem.merchant[0]['$'].name,
-			color: config.scrapers.chollometro.messageColor,
-			desc: rssItem.contentSnippet.slice(0, config.scrapers.maxDescriptionChars),
+			color: config.connectors.chollometro.messageColor,
+			desc: rssItem.contentSnippet.slice(0, config.connectors.maxDescriptionChars),
 			footer: rssItem.categories,
 			thumbnail: rssItem.image[0]['$'].url,
 			timestamp: rssItem.isoDate,
@@ -75,5 +75,5 @@ function _enrichMessage(rssItem) {
 }
 
 module.exports = {
-	startScraper,
+	startConnector,
 };

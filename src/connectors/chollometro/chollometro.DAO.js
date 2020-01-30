@@ -4,7 +4,7 @@
 const config = require('../../config');
 const logger = require('../../services/logging.service');
 const pgService = require('../../services/pg.service');
-const TABLE = config.scrapers.chollometro.ddbbTable;
+const TABLE = config.connectors.chollometro.ddbbTable;
 
 async function findExistingGuid(guid) {
 	try {
@@ -38,7 +38,7 @@ async function insertRecord(
 				merchant, price, content_snippet, content, categories
 			)
       VALUES (
-				'${guid}', '${config.scrapers.chollometro.baseUrl}', '${title}', '${link}',
+				'${guid}', '${config.connectors.chollometro.baseUrl}', '${title}', '${link}',
 				'${pubDate}', '${image}', '${merchantName}', '${price}', '${contentSnippet}',
 				'${content}', '${JSON.stringify(categories)}'
       )

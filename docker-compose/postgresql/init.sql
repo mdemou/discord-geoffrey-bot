@@ -1,6 +1,6 @@
-CREATE DATABASE scrap;
-\c scrap;
-CREATE TABLE scrap.public.elitetorrent (
+CREATE DATABASE connectors;
+\c connectors;
+CREATE TABLE connectors.public.elitetorrent (
   url_base varchar(150),
   url_movie varchar(150),
   image varchar(500) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE scrap.public.elitetorrent (
   date_created timestamp NOT NULL DEFAULT current_timestamp
 );
 
-CREATE TABLE scrap.public.cinesa (
+CREATE TABLE connectors.public.cinesa (
   cinesa_id varchar(20) NOT NULL,
   CONSTRAINT cinesa_id_pkey PRIMARY KEY (cinesa_id),
   base_url varchar(150),
@@ -22,7 +22,7 @@ CREATE TABLE scrap.public.cinesa (
   date_created timestamp NOT NULL DEFAULT current_timestamp
 );
 
-CREATE TABLE scrap.public.chollometro (
+CREATE TABLE connectors.public.chollometro (
   guid varchar(200) NOT NULL,
   CONSTRAINT guid_pkey PRIMARY KEY (guid),
   base_url varchar(150),

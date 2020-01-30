@@ -5,37 +5,46 @@ require('dotenv').config();
 module.exports = {
 	botName: 'Geoffrey',
 	channels: {
-		chollometro: 'testing',
-		cinesa: 'testing',
-		elitetorrent: 'testing',
+		digitalOcean: 'digitalocean',
+		chollometro: 'chollometro',
+		cinesa: 'cinesa',
+		elitetorrent: 'elitetorrent',
 	},
 	discord: {
 		apiKey: process.env.DISCORD_APIKEY,
 	},
-	scrapers: {
+	connectors: {
 		maxDescriptionChars: 200,
+		digitalOcean: {
+			balanceUrl: 'https://api.digitalocean.com/v2/customers/my/balance',
+			enabled: JSON.parse(process.env.CONNECTORS_DIGITALOCEAN_ENABLED),
+			image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1200px-DigitalOcean_logo.svg.png',
+			messageColor: '#0069ff',
+			timeout: parseInt(process.env.CONNECTORS_DIGITALOCEAN_TIMEOUT, 10) || 300000, // in ms
+			token: process.env.CONNECTORS_DIGITALOCEAN_TOKEN,
+		},
 		chollometro: {
 			baseUrl: 'https://www.chollometro.com',
 			ddbbTable: 'chollometro',
-			enabled: JSON.parse(process.env.SCRAPERS_CHOLLOMETRO_ENABLED),
+			enabled: JSON.parse(process.env.CONNECTORS_CHOLLOMETRO_ENABLED),
 			messageColor: '#ff7900',
-			timeout: parseInt(process.env.SCRAPERS_CHOLLOMETRO_TIMEOUT, 10) || 300000, // in ms
+			timeout: parseInt(process.env.CONNECTORS_CHOLLOMETRO_TIMEOUT, 10) || 300000, // in ms
 			url: 'https://www.chollometro.com/rss',
 		},
 		cinesa: {
 			baseUrl: 'https://www.cinesa.es',
 			ddbbTable: 'cinesa',
-			enabled: JSON.parse(process.env.SCRAPERS_CINESA_ENABLED),
+			enabled: JSON.parse(process.env.CONNECTORS_CINESA_ENABLED),
 			messageColor: '#2d4e82',
-			timeout: parseInt(process.env.SCRAPERS_CINESA_TIMEOUT, 10) || 600000, // in ms
+			timeout: parseInt(process.env.CONNECTORS_CINESA_TIMEOUT, 10) || 600000, // in ms
 			url: 'https://www.cinesa.es/Peliculas/Estrenos',
 		},
 		elitetorrent: {
 			baseUrl: 'https://elitetorrent.li',
 			ddbbTable: 'elitetorrent',
-			enabled: JSON.parse(process.env.SCRAPERS_ELITETORRENT_ENABLED),
+			enabled: JSON.parse(process.env.CONNECTORS_ELITETORRENT_ENABLED),
 			messageColor: '#2c6eb1',
-			timeout: parseInt(process.env.SCRAPERS_ELITETORRENT_TIMEOUT, 10) || 1200000, // in ms
+			timeout: parseInt(process.env.CONNECTORS_ELITETORRENT_TIMEOUT, 10) || 1200000, // in ms
 			url: 'https://www.elitetorrent.li/calidad/1080p-10/',
 		},
 	},

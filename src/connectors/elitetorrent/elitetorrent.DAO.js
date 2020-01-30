@@ -4,7 +4,7 @@
 const config = require('./../../config');
 const logger = require('./../../services/logging.service');
 const pgService = require('./../../services/pg.service');
-const TABLE = config.scrapers.elitetorrent.ddbbTable;
+const TABLE = config.connectors.elitetorrent.ddbbTable;
 
 async function findExistingImage(image) {
 	try {
@@ -29,7 +29,7 @@ async function insertRecord(urlMovie, image, quality, size, title, urlLang) {
 			`
       INSERT INTO ${TABLE} (url_base, url_movie, image, quality, size, title, url_lang)
       VALUES (
-        '${config.scrapers.elitetorrent.baseUrl}', '${urlMovie}', '${image}', '${quality}', '${size}', '${title}', '${urlLang}'
+        '${config.connectors.elitetorrent.baseUrl}', '${urlMovie}', '${image}', '${quality}', '${size}', '${title}', '${urlLang}'
       )
       `,
 		);
