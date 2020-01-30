@@ -4,7 +4,7 @@
 const config = require('../../config');
 const logger = require('../../services/logging.service');
 const pgService = require('../../services/pg.service');
-const TABLE = config.scrapers.cinesa.ddbbTable;
+const TABLE = config.connectors.cinesa.ddbbTable;
 
 async function findExistingDataId(dataId) {
 	try {
@@ -29,7 +29,7 @@ async function insertRecord(dataId, urlMoviePath, image, title) {
 			`
       INSERT INTO ${TABLE} (cinesa_id, base_url, url_movie_path, image, title)
       VALUES (
-        '${dataId}', '${config.scrapers.cinesa.baseUrl}', '${urlMoviePath}', '${image}', '${title}'
+        '${dataId}', '${config.connectors.cinesa.baseUrl}', '${urlMoviePath}', '${image}', '${title}'
       )
       `,
 		);

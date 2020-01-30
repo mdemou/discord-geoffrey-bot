@@ -4,7 +4,7 @@
 const config = require('./config');
 const discordService = require('./services/discord.service');
 const logger = require('./services/logging.service');
-const scraperService = require('./scraper/scraper.service');
+const connectorService = require('./connectors/connector.service');
 
 function app() {
 	logger.info(__filename, 'app', 'Running APP');
@@ -14,15 +14,17 @@ function app() {
 		logger.info(__filename, 'app', `...${discordClient.user.tag} connected!`);
 
 		const channels = {
+			testing: discordClient.channels.find('name', config.channels.chollometro),
 			chollometro: discordClient.channels.find('name', config.channels.chollometro),
 			cinesa: discordClient.channels.find('name', config.channels.cinesa),
 			elitetorrent: discordClient.channels.find('name', config.channels.elitetorrent),
 		};
 
+		channels.testing.send('Testing --- ' + new Date());
 		channels.chollometro.send('Chollometro --- ' + new Date());
 		channels.cinesa.send('Cinesa --- ' + new Date());
 		channels.elitetorrent.send('Elitetorrent --- ' + new Date());
-		scraperService.start(channels);
+		connectorService.start(channels);
 	});
 }
 
