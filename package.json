@@ -1,0 +1,46 @@
+{
+  "name": "discord-geoffrey-bot",
+  "version": "1.0.0",
+  "description": "Gather some info from different sources and send it to discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ignore-path .gitignore ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdemou/discord-geoffrey-bot"
+  },
+  "keywords": [
+    "discord",
+    "chollometro",
+    "cinesa",
+    "elitetorrent"
+  ],
+  "author": "mdemou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdemou/discord-geoffrey-bot/issues"
+  },
+  "homepage": "https://github.com/mdemou/discord-geoffrey-bot",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
+  },
+  "dependencies": {
+    "axios": "0.19.2",
+    "cheerio": "1.0.0-rc.3",
+    "discord.js": "11.3.2",
+    "dotenv": "8.2.0",
+    "pg": "7.17.1",
+    "pino": "5.16.0",
+    "rss-parser": "3.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "husky": "^4.2.1"
+  }
+}

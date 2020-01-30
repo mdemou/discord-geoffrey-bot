@@ -1,0 +1,47 @@
+version: '3.5'
+services:
+  discord_bot_postgres:
+    container_name: discord_bot_postgres
+    image: postgres:11.6
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "{{ HERE YOUR PAPERTRAIL LOG DESTINATION }}"
+        tag: "{{.Name}}/{{.ID}}"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /data/postgres
+    volumes:
+      - ./volumes/postgres:/data/postgres
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5434:5432"
+    restart: unless-stopped
+
+  discord_bot:
+    container_name: discord_bot
+    # image: discord_bot:1
+    build: ./../
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "{{ HERE YOUR PAPERTRAIL LOG DESTINATION }}"
+        tag: "{{.Name}}/{{.ID}}"
+    depends_on:
+      - discord_bot_postgres
+    environment:
+      DISCORD_APIKEY: {{ HERE YOUR DISCORD API KEY }}
+      LOG_LEVEL: info
+      SCRAPERS_CHOLLOMETRO_ENABLED: "true"
+      SCRAPERS_CHOLLOMETRO_TIMEOUT: 300000
+      SCRAPERS_CINESA_ENABLED: "true"
+      SCRAPERS_CINESA_TIMEOUT: 600000
+      SCRAPERS_ELITETORRENT_ENABLED: "true"
+      SCRAPERS_ELITETORRENT_TIMEOUT: 1200000
+      PGHOST: discord_bot_postgres
+      PGPASSWORD: changeme
+      PGUSER: postgres
+      PGDATABASE: scrap
+      PGPORT: 5432
+    restart: always
