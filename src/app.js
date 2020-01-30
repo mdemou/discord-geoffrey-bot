@@ -14,13 +14,13 @@ function app() {
 		logger.info(__filename, 'app', `...${discordClient.user.tag} connected!`);
 
 		const channels = {
-			testing: discordClient.channels.find('name', config.channels.chollometro),
+			digitalOcean: discordClient.channels.find('name', config.channels.digitalOcean),
 			chollometro: discordClient.channels.find('name', config.channels.chollometro),
 			cinesa: discordClient.channels.find('name', config.channels.cinesa),
 			elitetorrent: discordClient.channels.find('name', config.channels.elitetorrent),
 		};
 
-		channels.testing.send('Testing --- ' + new Date());
+		channels.digitalOcean.send('DigitalOcean --- ' + new Date());
 		channels.chollometro.send('Chollometro --- ' + new Date());
 		channels.cinesa.send('Cinesa --- ' + new Date());
 		channels.elitetorrent.send('Elitetorrent --- ' + new Date());

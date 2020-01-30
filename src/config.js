@@ -5,9 +5,10 @@ require('dotenv').config();
 module.exports = {
 	botName: 'Geoffrey',
 	channels: {
-		chollometro: 'testing',
-		cinesa: 'testing',
-		elitetorrent: 'testing',
+		digitalOcean: 'digitalocean',
+		chollometro: 'chollometro',
+		cinesa: 'cinesa',
+		elitetorrent: 'elitetorrent',
 	},
 	discord: {
 		apiKey: process.env.DISCORD_APIKEY,
@@ -15,6 +16,11 @@ module.exports = {
 	connectors: {
 		maxDescriptionChars: 200,
 		digitalOcean: {
+			balanceUrl: 'https://api.digitalocean.com/v2/customers/my/balance',
+			enabled: JSON.parse(process.env.CONNECTORS_DIGITALOCEAN_ENABLED),
+			image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1200px-DigitalOcean_logo.svg.png',
+			messageColor: '#0069ff',
+			timeout: parseInt(process.env.CONNECTORS_DIGITALOCEAN_TIMEOUT, 10) || 300000, // in ms
 			token: process.env.CONNECTORS_DIGITALOCEAN_TOKEN,
 		},
 		chollometro: {
