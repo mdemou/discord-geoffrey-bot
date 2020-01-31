@@ -9,3 +9,7 @@ install:
   - npm install
   - npm audit
   - npm run lint
+script:
+  - cat README.md
+  - echo "harry" > README.md
+  - cat README.md
