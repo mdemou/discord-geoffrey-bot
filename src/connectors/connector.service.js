@@ -8,7 +8,7 @@ const digitalOceanConnector = require('./digitalocean/digitalocean.connector');
 const elitetorrentConnector = require('./elitetorrent/elitetorrent.connector');
 const logger = require('../services/logging.service');
 
-function _connectorConfigMapper ({handler, name}) {
+function _connectorConfigMapper({ handler, name }) {
 	try {
 		logger.debug(__filename, '_connectorConfigMapper', 'Mapping');
 		return {
@@ -16,7 +16,7 @@ function _connectorConfigMapper ({handler, name}) {
 			handler,
 			name: config.channels[name],
 			timeout: config.connectors[name].timeout,
-		}
+		};
 	} catch (e) {
 		logger.error(__filename, '_connectorConfigMapper', e);
 	}
@@ -26,10 +26,10 @@ function _loadConnectorsConfig() {
 	try {
 		logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
 		return [
-			{handler: chollosConnector, name: config.channels.chollometro},
-			{handler: cinesaConnector, name: config.channels.cinesa},
-			{handler: digitalOceanConnector, name: config.channels.digitalocean},
-			{handler: elitetorrentConnector, name: config.channels.elitetorrent},
+			{ handler: chollosConnector, name: config.channels.chollometro },
+			{ handler: cinesaConnector, name: config.channels.cinesa },
+			{ handler: digitalOceanConnector, name: config.channels.digitalocean },
+			{ handler: elitetorrentConnector, name: config.channels.elitetorrent },
 		].map(_connectorConfigMapper);
 	}
 	catch (e) {

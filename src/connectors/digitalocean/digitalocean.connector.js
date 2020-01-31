@@ -22,7 +22,7 @@ function _buildHttpsRequest() {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + config.connectors.digitalocean.token,
-		}
+		},
 	};
 }
 

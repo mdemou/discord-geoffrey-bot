@@ -1,6 +1,7 @@
 
-# All about Discord Bot Geoffrey
+[![Build Status](https://travis-ci.com/mdemou/discord-geoffrey-bot.svg?token=N6ER3ebsyXEZNeycFquX&branch=master)](https://travis-ci.com/mdemou/discord-geoffrey-bot)
 
+# All about Discord Bot Geoffrey
 <img src="https://i0.pngocean.com/files/467/71/643/monocle-gentleman-top-hat-clip-art-gentleman.jpg" width=350 title="Monoculo" alt="Monoculo">
 
 This is a quick guide to run a Discord bot that gathers information from:

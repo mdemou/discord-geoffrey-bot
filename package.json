@@ -4,7 +4,7 @@
   "description": "Gather some info from different sources and send it to discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Warn: no tests specified\" ",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ignore-path .gitignore ."
   },
@@ -13,9 +13,10 @@
     "url": "git+https://github.com/mdemou/discord-geoffrey-bot"
   },
   "keywords": [
-    "discord",
     "chollometro",
     "cinesa",
+    "digitalocean",
+    "discord",
     "elitetorrent"
   ],
   "author": "mdemou",
@@ -27,7 +28,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run lint"
+      "pre-push": "npm audit"
     }
   },
   "dependencies": {
