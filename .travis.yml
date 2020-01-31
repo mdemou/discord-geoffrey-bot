@@ -1,19 +1,13 @@
 language: node_js
-
 branches:
   only:
-  - master
   - travis
-
 node_js:
   - "12"
-  - "node"
-
 sudo: false
-
 install:
-  - "npm install"
-
+  - npm install
+  - npm audit
 os:
   - "linux"
   - "osx"
