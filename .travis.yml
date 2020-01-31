@@ -3,7 +3,7 @@ language: node_js
 branches:
   only:
   - master
-  - stable
+  - travis
 
 node_js:
   - "12"
