@@ -3,7 +3,15 @@
 
 <img src="https://i0.pngocean.com/files/467/71/643/monocle-gentleman-top-hat-clip-art-gentleman.jpg" width=350 title="Monoculo" alt="Monoculo">
 
-This is a quick guide to run a Discord bot that gathers information from *Chollometro, Cinesa and Elitetorrent*, and send new result to different Discord channels.
+This is a quick guide to run a Discord bot that gathers information from:
+* Chollometro - Latests deals published in [Chollometro](https://www.chollometro.com/rss)
+* Cinesa - New movie listings [Cinesa](https://www.cinesa.es/Peliculas/Estrenos)
+* Elitetorrent - Latests spanish torrents available in [Elitetorrent](https://www.elitetorrent.li/calidad/1080p-10/)
+* Digital Ocean - Get balance [Digital Ocean](https://api.digitalocean.com/v2/customers/my/balance)
+
+Sends all that information to different Discord channles
+
+As many connectors to different sources could be added easily
 
 ## Before you begin
 
