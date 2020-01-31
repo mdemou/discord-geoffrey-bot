@@ -8,42 +8,45 @@ const digitalOceanConnector = require('./digitalocean/digitalocean.connector');
 const elitetorrentConnector = require('./elitetorrent/elitetorrent.connector');
 const logger = require('../services/logging.service');
 
+function _connectorConfigMapper ({handler, name}) {
+	try {
+		logger.debug(__filename, '_connectorConfigMapper', 'Mapping');
+		return {
+			enabled: config.connectors[name].enabled,
+			handler,
+			name: config.channels[name],
+			timeout: config.connectors[name].timeout,
+		}
+	} catch (e) {
+		logger.error(__filename, '_connectorConfigMapper', e);
+	}
+}
+
 function _loadConnectorsConfig() {
-	logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
-	return [
-		{
-			enabled: config.connectors.chollometro.enabled,
-			handler: chollosConnector,
-			name: config.channels.chollometro,
-			timeout: config.connectors.chollometro.timeout,
-		},
-		{
-			enabled: config.connectors.cinesa.enabled,
-			handler: cinesaConnector,
-			name: config.channels.cinesa,
-			timeout: config.connectors.cinesa.timeout,
-		},
-		{
-			enabled: config.connectors.digitalOcean.enabled,
-			handler: digitalOceanConnector,
-			name: config.channels.digitalOcean,
-			timeout: config.connectors.digitalOcean.timeout,
-		},
-		{
-			enabled: config.connectors.elitetorrent.enabled,
-			handler: elitetorrentConnector,
-			name: config.channels.elitetorrent,
-			timeout: config.connectors.elitetorrent.timeout,
-		},
-	];
+	try {
+		logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
+		return [
+			{handler: chollosConnector, name: config.channels.chollometro},
+			{handler: cinesaConnector, name: config.channels.cinesa},
+			{handler: digitalOceanConnector, name: config.channels.digitalocean},
+			{handler: elitetorrentConnector, name: config.channels.elitetorrent},
+		].map(_connectorConfigMapper);
+	}
+	catch (e) {
+		logger.error(__filename, '_loadConnectorsConfig', e);
+	}
 }
 
 function _scheduleConnector(connector, channel) {
-	logger.debug(__filename, '_scheduleConnector', 'Scheduling connectors');
-	setTimeout(async () => {
-		await connector.handler.startConnector(channel);
-		_scheduleConnector(connector, channel);
-	}, connector.timeout);
+	try {
+		logger.debug(__filename, '_scheduleConnector', 'Scheduling connectors');
+		setTimeout(async () => {
+			await connector.handler.startConnector(channel);
+			_scheduleConnector(connector, channel);
+		}, connector.timeout);
+	} catch (e) {
+		logger.error(__filename, '_scheduleConnector', e);
+	}
 }
 
 function start(channels) {
