@@ -1,7 +1,7 @@
 language: node_js
 branches:
   only:
-  - travis
+  - master
 node_js:
   - "12"
 sudo: false

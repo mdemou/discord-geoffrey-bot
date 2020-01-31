@@ -1,5 +1,6 @@
 
 # All about Discord Bot Geoffrey
+[![build status](https://travis-ci.com/mdemou/discord-geoffrey-bot.svg?token=N6ER3ebsyXEZNeycFquX&branch=${TRAVIS_BRANCH})](https://github.com/mdemou/discord-geoffrey-bot)
 
 <img src="https://i0.pngocean.com/files/467/71/643/monocle-gentleman-top-hat-clip-art-gentleman.jpg" width=350 title="Monoculo" alt="Monoculo">
 
