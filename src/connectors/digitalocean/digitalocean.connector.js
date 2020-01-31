@@ -9,7 +9,7 @@ const logger = require('../../services/logging.service');
 async function startConnector(channel) {
 	try {
 		logger.info(__filename, 'startConnector', 'Initializing digital ocean connector');
-		const balance = await axiosService.get(config.connectors.digitalOcean.balanceUrl, _buildHttpsRequest());
+		const balance = await axiosService.get(config.connectors.digitalocean.balanceUrl, _buildHttpsRequest());
 		channel.send(_enrichMessage(balance));
 	} catch (e) {
 		logger.error(__filename, 'startConnector', e);
@@ -21,7 +21,7 @@ function _buildHttpsRequest() {
 	return {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + config.connectors.digitalOcean.token,
+			'Authorization': 'Bearer ' + config.connectors.digitalocean.token,
 		}
 	};
 }
@@ -30,14 +30,14 @@ function _enrichMessage(balance) {
 	try {
 		logger.debug(__filename, '_enrichMessage', 'Enriching discord message');
 		return discordService.sendRichEmbed({
-			color: config.connectors.digitalOcean.messageColor,
+			color: config.connectors.digitalocean.messageColor,
 			desc: ` \
 			Month to date: ${balance.month_to_date_balance} \n \
 			Account balance: ${balance.account_balance} \n \
 			Month to date usage: ${balance.month_to_date_usage} \
 			`,
 			footer: `Generated at ${balance.generated_at}`,
-			thumbnail: config.connectors.digitalOcean.image,
+			thumbnail: config.connectors.digitalocean.image,
 			title: 'Digital Ocean Balance',
 		});
 	} catch (e) {

@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = {
 	botName: 'Geoffrey',
 	channels: {
-		digitalOcean: 'digitalocean',
+		digitalocean: 'digitalocean',
 		chollometro: 'chollometro',
 		cinesa: 'cinesa',
 		elitetorrent: 'elitetorrent',
@@ -15,7 +15,7 @@ module.exports = {
 	},
 	connectors: {
 		maxDescriptionChars: 200,
-		digitalOcean: {
+		digitalocean: {
 			balanceUrl: 'https://api.digitalocean.com/v2/customers/my/balance',
 			enabled: JSON.parse(process.env.CONNECTORS_DIGITALOCEAN_ENABLED),
 			image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1200px-DigitalOcean_logo.svg.png',
