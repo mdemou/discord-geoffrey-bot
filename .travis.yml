@@ -8,3 +8,4 @@ sudo: false
 install:
   - npm install
   - npm audit
+  - npm lint
