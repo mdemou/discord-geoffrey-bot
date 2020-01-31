@@ -8,34 +8,21 @@ const digitalOceanConnector = require('./digitalocean/digitalocean.connector');
 const elitetorrentConnector = require('./elitetorrent/elitetorrent.connector');
 const logger = require('../services/logging.service');
 
+const _connectorConfigMapper = ({handler, name}) => ({
+  enabled: config.connectors[name].enabled,
+  handler,
+  name: config.channels[name],
+  timeout: config.connectors[name].timeout,
+})
+
 function _loadConnectorsConfig() {
-	logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
-	return [
-		{
-			enabled: config.connectors.chollometro.enabled,
-			handler: chollosConnector,
-			name: config.channels.chollometro,
-			timeout: config.connectors.chollometro.timeout,
-		},
-		{
-			enabled: config.connectors.cinesa.enabled,
-			handler: cinesaConnector,
-			name: config.channels.cinesa,
-			timeout: config.connectors.cinesa.timeout,
-		},
-		{
-			enabled: config.connectors.digitalOcean.enabled,
-			handler: digitalOceanConnector,
-			name: config.channels.digitalOcean,
-			timeout: config.connectors.digitalOcean.timeout,
-		},
-		{
-			enabled: config.connectors.elitetorrent.enabled,
-			handler: elitetorrentConnector,
-			name: config.channels.elitetorrent,
-			timeout: config.connectors.elitetorrent.timeout,
-		},
-	];
+  logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
+  return [
+    {handler: chollosConnector, name: 'chollometro'},
+    {handler: cinesaConnector, name: 'cinesa'},
+    {handler: digitalOceanConnector, name: 'digitalOcean'},
+    {handler: elitetorrentConnector, name: 'elitetorrent'},
+  ].map(_connectorConfigMapper);
 }
 
 function _scheduleConnector(connector, channel) {
