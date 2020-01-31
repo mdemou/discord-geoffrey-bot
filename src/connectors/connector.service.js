@@ -18,10 +18,10 @@ const _connectorConfigMapper = ({handler, name}) => ({
 function _loadConnectorsConfig() {
   logger.debug(__filename, '_loadConnectorsConfig', 'Loading connectors config');
   return [
-    {handler: chollosConnector, name: 'chollometro'},
-    {handler: cinesaConnector, name: 'cinesa'},
-    {handler: digitalOceanConnector, name: 'digitalOcean'},
-    {handler: elitetorrentConnector, name: 'elitetorrent'},
+    {handler: chollosConnector, name: config.channels.chollometro},
+    {handler: cinesaConnector, name: config.channels.cinesa},
+    {handler: digitalOceanConnector, name: config.channels.digitalOcean},
+    {handler: elitetorrentConnector, name: config.channels.elitetorrent},
   ].map(_connectorConfigMapper);
 }
 
