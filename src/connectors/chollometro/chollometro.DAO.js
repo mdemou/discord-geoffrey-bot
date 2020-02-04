@@ -28,6 +28,8 @@ async function insertRecord(
 ) {
 	try {
 		logger.debug(__filename, 'insertRecord', 'Inserting in ddbb new record');
+		title = title.replace(/'/g, ' ');
+		merchantName = merchantName.replace(/'/g, ' ');
 		contentSnippet = contentSnippet.replace(/'/g, ' ');
 		content = content.replace(/'/g, ' ');
 		(price == null) ? price = '' : '';
