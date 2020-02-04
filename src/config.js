@@ -54,7 +54,7 @@ module.exports = {
 			enabled: JSON.parse(process.env.CONNECTORS_ELTIEMPONET_ENABLED),
 			image: 'https://blog.macsales.com/wp-content/uploads/2019/02/ios12-weather-app-icon-thumbnail_2x.png',
 			messageColor: '#275280',
-			sendBefore: 6,
+			sendBefore: 6, // just send before 6am
 			timeout: parseInt(process.env.CONNECTORS_ELTIEMPONET_TIMEOUT, 10) || 21600000, // in ms
 			apiUrl: `https://www.el-tiempo.net/api/json/v1/provincias/${process.env.CONNECTORS_ELTIEMPONET_CITYCODE}/municipios/${process.env.CONNECTORS_ELTIEMPONET_TOWNCODE}/weather`,
 		},
