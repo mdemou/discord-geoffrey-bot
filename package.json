@@ -1,6 +1,6 @@
 {
   "name": "discord-geoffrey-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gather some info from different sources and send it to discord",
   "main": "index.js",
   "scripts": {
