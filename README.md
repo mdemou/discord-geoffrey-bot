@@ -7,7 +7,7 @@ This is a quick guide to run a Discord bot that gathers information from:
 * Chollometro - Latests deals published in [Chollometro](https://www.chollometro.com/rss)
 * Cinesa - New movie listings [Cinesa](https://www.cinesa.es/Peliculas/Estrenos)
 * Digital Ocean - Get balance [Digital Ocean](https://api.digitalocean.com/v2/customers/my/balance)
-* El Tiempo - Get weather forecast from [El Tiempo](https://www.el-tiempo.net/)
+* El Tiempo - Get weather forecast from [El Tiempo](https://www.el-tiempo.net/) and its [API](https://www.el-tiempo.net/api)
 * Elitetorrent - Latests spanish torrents available in [Elitetorrent](https://www.elitetorrent.li/calidad/1080p-10/)
 
 Sends all that information to different Discord channles
