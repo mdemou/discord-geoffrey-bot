@@ -6,8 +6,9 @@
 This is a quick guide to run a Discord bot that gathers information from:
 * Chollometro - Latests deals published in [Chollometro](https://www.chollometro.com/rss)
 * Cinesa - New movie listings [Cinesa](https://www.cinesa.es/Peliculas/Estrenos)
-* Elitetorrent - Latests spanish torrents available in [Elitetorrent](https://www.elitetorrent.li/calidad/1080p-10/)
 * Digital Ocean - Get balance [Digital Ocean](https://api.digitalocean.com/v2/customers/my/balance)
+* El Tiempo - Get weather forecast from [El Tiempo](https://www.el-tiempo.net/) and its [API](https://www.el-tiempo.net/api)
+* Elitetorrent - Latests spanish torrents available in [Elitetorrent](https://www.elitetorrent.li/calidad/1080p-10/)
 
 Sends all that information to different Discord channles
 
@@ -47,15 +48,20 @@ Add .env file to root directory with the following environment variables. Also t
 ```sh
 DISCORD_APIKEY={{ ADDHEREYOURAPIKEY }}
 LOG_LEVEL=debug
+CONNECTORS_CHOLLOMETRO_ENABLED=true
+CONNECTORS_CHOLLOMETRO_TIMEOUT=300000
+CONNECTORS_CINESA_ENABLED=true
+CONNECTORS_CINESA_TIMEOUT=600000
+CONNECTORS_DIGITALOCEAN_ENABLED=true
 CONNECTORS_DIGITALOCEAN_TIMEOUT=2400000
 CONNECTORS_DIGITALOCEAN_TOKEN={{ HERE YOUR DIGITAL OCEAN TOKEN }}
-CONNECTORS_DIGITALOCEAN_ENABLED=true
-CONNECTORS_CHOLLOMETRO_TIMEOUT=300000
-CONNECTORS_CHOLLOMETRO_ENABLED=true
-CONNECTORS_CINESA_TIMEOUT=600000
-CONNECTORS_CINESA_ENABLED=true
-CONNECTORS_ELITETORRENT_TIMEOUT=1200000
 CONNECTORS_ELITETORRENT_ENABLED=true
+CONNECTORS_ELTIEMPONET_TIMEOUT=3000
+CONNECTORS_ELITETORRENT_TIMEOUT=1200000
+CONNECTORS_ELTIEMPONET_ENABLED=true
+CONNECTORS_ELTIEMPONET_CITYCODE=28 # Get this value from El tiempo net API https://www.el-tiempo.net/api
+CONNECTORS_ELTIEMPONET_TIMEOUT=21600000
+CONNECTORS_ELTIEMPONET_TOWNCODE=28004 # Get this value from El tiempo net API https://www.el-tiempo.net/api
 PGHOST=localhost
 PGPASSWORD=changeme
 PGUSER=postgres

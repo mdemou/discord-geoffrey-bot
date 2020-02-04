@@ -14,16 +14,18 @@ function app() {
 		logger.info(__filename, 'app', `...${discordClient.user.tag} connected!`);
 
 		const channels = {
-			digitalocean: discordClient.channels.find('name', config.channels.digitalocean),
 			chollometro: discordClient.channels.find('name', config.channels.chollometro),
 			cinesa: discordClient.channels.find('name', config.channels.cinesa),
+			digitalocean: discordClient.channels.find('name', config.channels.digitalocean),
 			elitetorrent: discordClient.channels.find('name', config.channels.elitetorrent),
+			eltiemponet: discordClient.channels.find('name', config.channels.eltiemponet),
 		};
 
-		channels.digitalocean.send('DigitalOcean --- ' + new Date());
 		channels.chollometro.send('Chollometro --- ' + new Date());
 		channels.cinesa.send('Cinesa --- ' + new Date());
+		channels.digitalocean.send('DigitalOcean --- ' + new Date());
 		channels.elitetorrent.send('Elitetorrent --- ' + new Date());
+		channels.eltiemponet.send('Eltiemponet --- ' + new Date());
 		connectorService.start(channels);
 	});
 }
