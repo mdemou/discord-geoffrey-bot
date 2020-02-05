@@ -1,3 +1,6 @@
+[![Actions Status](https://github.com/mdemou/discord-geoffrey-bot/workflows/{workflow_name}/badge.svg)](https://github.com/mdemou/discord-geoffrey-bot/actions)
+
+
 [![Build Status](https://travis-ci.com/mdemou/discord-geoffrey-bot.svg?branch=master)](https://travis-ci.com/mdemou/discord-geoffrey-bot)
 
 # All about Discord Bot Geoffrey
