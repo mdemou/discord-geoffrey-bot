@@ -37,6 +37,8 @@ module.exports = {
 			enabled: JSON.parse(process.env.CONNECTORS_DIGITALOCEAN_ENABLED),
 			image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/1200px-DigitalOcean_logo.svg.png',
 			messageColor: '#0069ff',
+			sendBefore: 12, // just send before 12pm
+			sendAfter: 6, // just send after 6am
 			timeout: parseInt(process.env.CONNECTORS_DIGITALOCEAN_TIMEOUT, 10) || 300000, // in ms
 			token: process.env.CONNECTORS_DIGITALOCEAN_TOKEN,
 		},

@@ -10,9 +10,25 @@ async function startConnector(channel) {
 	try {
 		logger.info(__filename, 'startConnector', 'Initializing digital ocean connector');
 		const balance = await axiosService.get(config.connectors.digitalocean.balanceUrl, _buildHttpsRequest());
-		channel.send(_enrichMessage(balance));
+		if(_timeToSend() === true) {
+			channel.send(_enrichMessage(balance));
+		}
 	} catch (e) {
 		logger.error(__filename, 'startConnector', e);
+	}
+}
+
+function _timeToSend() {
+	try {
+		logger.info(__filename, '_timeToSend', 'Checking if it is time to send');
+		if (config.connectors.digitalocean.sendBefore >= new Date().getUTCHours() &&
+		new Date().getUTCHours() >= config.connectors.digitalocean.sendAfter) {
+			return true;
+		} else {
+			return false;
+		}
+	} catch (e) {
+		logger.error(__filename, '_timeToSend', e);
 	}
 }
 
