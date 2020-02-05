@@ -1,5 +1,4 @@
-[![Actions Status](https://github.com/mdemou/discord-geoffrey-bot/workflows/{workflow_name}/badge.svg)](https://github.com/mdemou/discord-geoffrey-bot/actions)
-
+![Github Actions Status](https://github.com/mdemou/discord-geoffrey-bot/workflows/Node.js%20CI/badge.svg)
 
 [![Build Status](https://travis-ci.com/mdemou/discord-geoffrey-bot.svg?branch=master)](https://travis-ci.com/mdemou/discord-geoffrey-bot)
 
