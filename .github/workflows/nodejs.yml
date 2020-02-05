@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - feat/github-actions-2
+    - master
 
 jobs:
   build:
