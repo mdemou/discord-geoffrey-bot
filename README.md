@@ -1,4 +1,5 @@
 ![Github Actions Status](https://github.com/mdemou/discord-geoffrey-bot/workflows/Node.js%20CI/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mdemou/discord-geoffrey-bot/blob/master/LICENSE)
 
 [![Build Status](https://travis-ci.com/mdemou/discord-geoffrey-bot.svg?branch=master)](https://travis-ci.com/mdemou/discord-geoffrey-bot)
 
