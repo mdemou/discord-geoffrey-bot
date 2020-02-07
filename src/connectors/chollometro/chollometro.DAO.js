@@ -28,11 +28,7 @@ async function insertRecord(
 ) {
 	try {
 		logger.debug(__filename, 'insertRecord', 'Inserting in ddbb new record');
-		title = title.replace(/'/g, ' ');
-		merchantName = merchantName.replace(/'/g, ' ');
-		contentSnippet = contentSnippet.replace(/'/g, ' ');
-		content = content.replace(/'/g, ' ');
-		(price == null) ? price = '' : '';
+
 		await pgService.query(
 			`
       INSERT INTO ${TABLE} (
@@ -42,7 +38,7 @@ async function insertRecord(
       VALUES (
 				'${guid}', '${config.connectors.chollometro.baseUrl}', '${title}', '${link}',
 				'${pubDate}', '${image}', '${merchantName}', '${price}', '${contentSnippet}',
-				'${content}', '${JSON.stringify(categories)}'
+				'${content}', '${categories}'
       )
       `,
 		);

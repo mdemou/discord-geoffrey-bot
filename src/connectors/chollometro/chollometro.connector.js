@@ -3,6 +3,7 @@
 // config and services
 const config = require('../../config');
 const chollometroDAO = require('./chollometro.DAO');
+const chollometroModel = require('./chollometro.model');
 const discordService = require('../../services/discord.service');
 const logger = require('../../services/logging.service');
 const rssService = require('../../services/rss.parser.service');
@@ -14,8 +15,8 @@ async function startConnector(channel) {
 			config.connectors.chollometro.url, _buildCustomRssFields(),
 		);
 		const filteredItems = await _getNotPublishedItems(rssArray.items);
-		filteredItems.forEach(cholloItem => {
-			channel.send(_enrichMessage(cholloItem));
+		filteredItems.forEach(formatedCholloItem => {
+			channel.send(_enrichMessage(formatedCholloItem));
 		});
 	} catch (e) {
 		logger.error(__filename, 'startConnector', e);
@@ -29,12 +30,14 @@ async function _getNotPublishedItems(rssItems) {
 		for (const item of rssItems) {
 			const myRows = await chollometroDAO.findExistingGuid(item.guid);
 			if (myRows.length === 0) {
+				const formatedCholloItem = chollometroModel.formatChollo(item);
 				logger.debug(__filename, '_getNotPublishedItems', 'Inserting into DDBB');
 				await chollometroDAO.insertRecord(
-					item.guid, item.title, item.link, item.pubDate, item.image[0]['$'].url, item.merchant[0]['$'].name,
-					item.merchant[0]['$'].price, item.contentSnippet, item.content, item.categories,
+					formatedCholloItem.guid, formatedCholloItem.title, formatedCholloItem.link, formatedCholloItem.pubDate,
+					formatedCholloItem.image, formatedCholloItem.merchant, formatedCholloItem.price,
+					formatedCholloItem.contentSnippet, formatedCholloItem.content, formatedCholloItem.categories,
 				);
-				nonSentItems.push(item);
+				nonSentItems.push(formatedCholloItem);
 			}
 		}
 		return nonSentItems;
@@ -55,18 +58,17 @@ function _buildCustomRssFields() {
 	};
 }
 
-function _enrichMessage(rssItem) {
+function _enrichMessage(formatedCholloItem) {
 	try {
 		logger.debug(__filename, '_enrichMessage', 'Enriching discord message');
 		return discordService.sendRichEmbed({
-			author: rssItem.merchant[0]['$'].price ? `${rssItem.merchant[0]['$'].name} · ${rssItem.merchant[0]['$'].price}` : rssItem.merchant[0]['$'].name,
+			author: `${formatedCholloItem.merchant} - ${formatedCholloItem.price}`,
 			color: config.connectors.chollometro.messageColor,
-			desc: rssItem.contentSnippet.slice(0, config.connectors.maxDescriptionChars),
-			footer: rssItem.categories,
-			thumbnail: rssItem.image[0]['$'].url,
-			timestamp: rssItem.isoDate,
-			title: rssItem.title,
-			URL: rssItem.link,
+			desc: formatedCholloItem.contentSnippet.slice(0, config.connectors.maxDescriptionChars),
+			footer: JSON.parse(formatedCholloItem.categories),
+			thumbnail: formatedCholloItem.image,
+			title: formatedCholloItem.title,
+			URL: formatedCholloItem.link,
 		});
 
 	} catch (e) {
